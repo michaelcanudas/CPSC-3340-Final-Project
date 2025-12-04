@@ -6,7 +6,7 @@
 
 const uint8_t READERS_COUNT = 3;
 const uint8_t sdaPins[READERS_COUNT] = {4, 5, 17};
-const uint8_t RST_PIN = 27;
+const uint8_t RST_PIN = 22;
 
 const byte TARGET_UIDS[READERS_COUNT][7] = {
 	{0x04, 0x33, 0x62, 0xCC, 0x2E, 0x61, 0x80},
