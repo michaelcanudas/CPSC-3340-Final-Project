@@ -3,8 +3,12 @@ import threading
 import queue
 
 logs = queue.Queue()
-
 devices = {}
+commands = {
+    'print': lambda args: {
+        send_to_device('printer', f'print:{args}\n\n\n')
+    }
+}
 
 def receive_from_device(conn, addr):
     device_id = addr

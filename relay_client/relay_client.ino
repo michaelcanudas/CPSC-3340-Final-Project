@@ -2,10 +2,11 @@
 
 const char *ssid = "yale wireless";
 
-const char *serverIP = "10.66.236.77"; // Pi IP address
+const char *serverIP = "10.66.236.77";
 const uint16_t serverPort = 7531;
 
 const int relayPin = 23;
+bool on = false;
 
 WiFiClient client;
 
@@ -24,7 +25,6 @@ void setup()
   }
   Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
 
-  // Try to connect to the server
   if (client.connect(serverIP, serverPort))
   {
     Serial.println("Connected to server!");
@@ -53,19 +53,21 @@ void loop()
 
   if (client.available())
   {
-    String cmd = client.readStringUntil('\n');
-    cmd.trim();
-    Serial.println("Received: " + cmd);
+    String command = client.readStringUntil('\n').trim();
+    Serial.println("Received: " + command);
 
-    if (cmd == "on:on")
+    if (command == "toggle")
+    {
+      on = !on;
+    }
+
+    if (on)
     {
       digitalWrite(relayPin, HIGH);
-      Serial.println("Lights ON");
     }
-    else if (cmd == "off:off")
+    else
     {
       digitalWrite(relayPin, LOW);
-      Serial.println("Lights OFF");
     }
   }
 }
