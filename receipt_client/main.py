@@ -1,6 +1,9 @@
 import socket
 from escpos.printer import Usb
 
+HOST = '10.66.236.77'
+PORT = 7531
+
 def print_message(printer, message):
     printer.text(message)
     print("Printed message {message}")
@@ -24,9 +27,9 @@ def receive_from_server(conn):
     finally:
         conn.close()
 
-def start_client(host='127.0.0.1', port=7531):
+def start_client():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((host, port))
+        s.connect((HOST, PORT))
         print("Listening...")
 
         s.send('printer'.encode())
