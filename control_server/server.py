@@ -5,8 +5,8 @@ import queue
 logs = queue.Queue()
 devices = {}
 commands = {
-    'test': lambda args: {
-        
+    'print': lambda args: {
+        send_to_device('printer', f'print:{args}\n\n\n')
     }
 }
 

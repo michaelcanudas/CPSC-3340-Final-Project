@@ -1,5 +1,5 @@
 import threading
-from server import logs, devices, send_to_device
+from server import logs, devices, commands, send_to_device
 from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
 
@@ -23,12 +23,13 @@ def run_cli():
                 continue
 
             try:
-                device, command = user_input.split(maxsplit=1)
+                device, command = user_input.split(':', maxsplit=1)
             except ValueError:
                 logs.put('Command has invalid format')
                 continue
 
-            if device == 'server':
+            if device in commands:
+                commands[device](command)
                 continue
 
             if device not in devices:
