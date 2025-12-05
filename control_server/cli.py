@@ -36,10 +36,7 @@ def run_cli():
                 logs.put('Device is invalid')
                 continue
 
-            if send_to_device(device, command):
-                logs.put(f'Sent command to {device}: {command}')
-            else:
-                logs.put(f'Failed to send command to {device}: {command}')
+            send_to_device(device, command)
 
         except KeyboardInterrupt:
             logs.put('Exiting CLI...')

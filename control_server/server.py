@@ -20,7 +20,7 @@ def receive_from_device(conn, addr):
         logs.put(f'{addr} connected with id: {device_id}')
 
         while True:
-            raw = conn.recv(1024).decode()
+            raw = conn.recv(1024).decode().strip()
             if not raw:
                 break
 
@@ -33,10 +33,7 @@ def receive_from_device(conn, addr):
                 logs.put(f'{device_id} sent command to invalid device: {device}')
                 continue
             
-            if send_to_device(device, command):
-                logs.put(f'{device_id} sent command to {device}: {command}')
-            else:
-                logs.put(f'{device_id} failed to send command to {device}: {command}')
+            send_to_device(device, command)
     finally:
         conn.close()
 
@@ -47,9 +44,10 @@ def send_to_device(device, command):
     try:
         conn = devices[device]
         conn.send(command.encode())
-        return True
+
+        logs.put(f'Sent command to {device}: {command}')
     except:
-        return False
+        logs.put(f'Failed to send command to {device}: {command}')
 
 def start_server(host='0.0.0.0', port=7531):
     s = socket.socket()
