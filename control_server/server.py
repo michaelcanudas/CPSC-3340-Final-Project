@@ -1,13 +1,19 @@
 import socket
 import threading
 import queue
+import time
+
+def wth():
+    send_to_device('printer', 'print:what the helly!!!!' + ('\n' * 30))
+    while True:
+        send_to_device('relay', 'toggle')
+        time.sleep(1) 
 
 logs = queue.Queue()
 devices = {}
 commands = {
-    'print': lambda args: {
-        send_to_device('printer', f'print:{args}\n\n\n')
-    }
+    'print': lambda args: send_to_device('printer', f'print:{args}\n\n\n'),
+    'what the helly': wth
 }
 
 def receive_from_device(conn, addr):
