@@ -7,7 +7,7 @@ const uint16_t serverPort = 7531;
 const int relayPin = 23;
 
 WiFiClient client;
-bool on = false;
+bool isRed = false;
 bool lastState = false;
 
 void connectWiFi()
@@ -74,15 +74,15 @@ void loop()
 
     Serial.println("Received: " + command);
 
-    if (command == "toggle")
+    if (command == "white")
     {
-      on = !on;
+      isRed = false;
+    }
+    else if (command == "red")
+    {
+      isRed = true;
     }
   }
 
-  if (lastState != on)
-  {
-    digitalWrite(relayPin, on ? HIGH : LOW);
-    lastState = on;
-  }
+  digitalWrite(relayPin, isRed ? HIGH : LOW);
 }
