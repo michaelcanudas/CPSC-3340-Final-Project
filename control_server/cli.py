@@ -1,13 +1,9 @@
 import threading
-import queue
-from server import devices, send_to_device
+from server import send_to_device
 from events import trigger
+from state import devices, logs, running
 from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
-
-
-logs = queue.Queue()
-running = True
 
 
 def display_logs():
@@ -22,7 +18,7 @@ def display_logs():
 
 def run_cli():
     global running
-    
+
     session = PromptSession()
     threading.Thread(target=display_logs, daemon=True).start()
     

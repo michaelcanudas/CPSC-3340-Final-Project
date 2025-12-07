@@ -1,4 +1,4 @@
-from cli import logs
+from state import logs
 
 
 events = {}

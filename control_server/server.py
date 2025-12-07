@@ -1,18 +1,13 @@
 import socket
 import threading
-from cli import logs
 from events import trigger
-
-
-devices = {}
-devices_lock = threading.Lock()
-running = True
+from state import devices, devices_lock, logs, running
 
 
 def receive_from_device(conn, addr):
     global running
     device_id = None
-    
+
     try:
         conn.settimeout(0.5)
         device_id = conn.recv(1024).decode().strip()
