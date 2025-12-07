@@ -9,12 +9,12 @@ def receive_from_device(conn, addr):
     device_id = None
 
     try:
-        conn.settimeout(0.5)
         device_id = conn.recv(1024).decode().strip()
         if not device_id:
             logs.put(f'{addr} failed to send device id, closing')
             return
 
+        conn.settimeout(0.5)
         with devices_lock:
             devices[device_id] = conn
 
