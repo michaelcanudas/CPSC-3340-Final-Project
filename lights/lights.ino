@@ -15,14 +15,14 @@ void connectWiFi()
   if (WiFi.status() == WL_CONNECTED)
     return;
 
-  Serial.print("> Connecting to WiFi");
+  Serial.print("Connecting to WiFi");
   WiFi.begin(ssid);
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
     Serial.print(".");
   }
-  Serial.println("\n> Connected! IP: " + WiFi.localIP().toString());
+  Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
 }
 
 bool connectServer()
@@ -30,16 +30,16 @@ bool connectServer()
   if (client.connected())
     return true;
 
-  Serial.println("> Connecting to server...");
+  Serial.println("Connecting to server...");
   if (client.connect(serverIP, serverPort))
   {
     client.print("lights");
-    Serial.println("> Connected to server!");
+    Serial.println("Connected to server!");
     return true;
   }
   else
   {
-    Serial.println("> Server connection failed.");
+    Serial.println("Server connection failed.");
     return false;
   }
 }
@@ -72,7 +72,7 @@ void loop()
     String command = client.readStringUntil('\n');
     command.trim();
 
-    Serial.println("> Received: " + command);
+    Serial.println("Received: " + command);
 
     if (command == "toggle")
     {

@@ -38,7 +38,7 @@ void sendEvent(uint8_t readerId, byte *uid, uint8_t uidSize)
 	}
 
 	client.println(msg);
-	Serial.println("> Sent: " + msg);
+	Serial.println("Sent: " + msg);
 }
 
 void setup()
@@ -47,22 +47,22 @@ void setup()
 	SPI.begin();
 
 	WiFi.begin(ssid);
-	Serial.print("> Connecting to WiFi");
+	Serial.print("Connecting to WiFi");
 	while (WiFi.status() != WL_CONNECTED)
 	{
 		delay(500);
 		Serial.print(".");
 	}
-	Serial.println("\n> Connected! IP: " + WiFi.localIP().toString());
+	Serial.println("\nConnected! IP: " + WiFi.localIP().toString());
 
 	if (client.connect(serverIP, serverPort))
 	{
-		Serial.println("> Connected to server!");
+		Serial.println("Connected to server!");
 		client.println("presents");
 	}
 	else
 	{
-		Serial.println("> Connection failed.");
+		Serial.println("Connection failed.");
 	}
 
 	for (uint8_t i = 0; i < READERS_COUNT; i++)
@@ -83,10 +83,10 @@ void loop()
 {
 	if (!client.connected())
 	{
-		Serial.println("> Disconnected. Reconnecting...");
+		Serial.println("Disconnected. Reconnecting...");
 		if (client.connect(serverIP, serverPort))
 		{
-			Serial.println("> Reconnected!");
+			Serial.println("Reconnected!");
 			client.println("presents");
 		}
 		else
@@ -105,7 +105,7 @@ void loop()
 			memset(lastReadUIDs[i], 0, 7);
 			memcpy(lastReadUIDs[i], reader->uid.uidByte, reader->uid.size);
 
-			Serial.print("> Reader ");
+			Serial.print("Reader ");
 			Serial.print(i);
 			Serial.println(" Updated");
 

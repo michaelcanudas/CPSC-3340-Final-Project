@@ -10,9 +10,9 @@ PORT = 7531
 def print_message(printer, args):
     try:
         printer.text(args.replace('\\n', '\n').strip())
-        print(f"> Printed: {args}")
+        print(f"Printed: {args}")
     except Exception as e:
-        print(f"> Printer error: {e}")
+        print(f"Printer error: {e}")
 
 
 def receive_from_server(conn):
@@ -25,7 +25,7 @@ def receive_from_server(conn):
             try:
                 command, args = raw.split(':', 1)
             except ValueError:
-                print(f"> Invalid message: {raw}")
+                print(f"Invalid message: {raw}")
                 continue
 
             if command == "print":
@@ -39,12 +39,12 @@ def start_client():
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.connect((HOST, PORT))
-                print("> Listening...")
+                print("Listening...")
                 s.send('printer'.encode())
 
                 receive_from_server(s)
         except Exception as e:
-            print(f"> Connection failed, retrying in 2s... ({e})")
+            print(f"Connection failed, retrying in 2s... ({e})")
             time.sleep(2)
 
 

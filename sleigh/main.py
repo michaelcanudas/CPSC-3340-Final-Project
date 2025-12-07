@@ -20,12 +20,12 @@ running = True
 
 def activate():
     relay.on()
-    print('> Activated')
+    print('Activated')
 
 
 def deactivate():
     relay.off()
-    print('> Deactivated')
+    print('Deactivated')
 
 
 def magnet_update(conn):
@@ -44,9 +44,9 @@ def magnet_update(conn):
 def send_to_server(conn, message):
     try:
         conn.send(message.encode())
-        print(f'> Sent message to server: {message}')
+        print(f'Sent message to server: {message}')
     except Exception as e:
-        print(f'> Failed to send message to server: {message} ({e})')
+        print(f'Failed to send message to server: {message} ({e})')
 
 
 def receive_from_server(conn):
@@ -62,7 +62,7 @@ def receive_from_server(conn):
                 deactivate()
 
     except Exception as e:
-        print(f'> Server read error: {e}')
+        print(f'Server read error: {e}')
 
     finally:
         try:
@@ -76,13 +76,13 @@ def connect():
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect((HOST, PORT))
-            print('> Connected')
+            print('Connected')
 
             s.send('sleigh'.encode())
             return s
 
         except Exception as e:
-            print(f'> Connection failed, retrying in 2s... ({e})')
+            print(f'Connection failed, retrying in 2s... ({e})')
             time.sleep(2)
 
     return None
@@ -103,14 +103,14 @@ def start_client():
 
         receive_from_server(conn)
 
-        print('> Disconnected from server, reconnecting...')
+        print('Disconnected from server, reconnecting...')
 
 
 def shutdown():
     global running
     running = False
     deactivate()
-    print('> Shutting down...')
+    print('Shutting down...')
     sys.exit(0)
 
 
