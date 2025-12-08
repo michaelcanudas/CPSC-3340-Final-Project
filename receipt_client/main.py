@@ -5,6 +5,7 @@ from escpos.printer import Usb
 
 HOST = '193.122.147.106'
 PORT = 7531
+printer = Usb(0x0416, 0x5011, in_ep=0x81, out_ep=0x03, profile="POS-5890")
 
 
 def print_message(printer, args):
@@ -16,7 +17,6 @@ def print_message(printer, args):
 
 
 def receive_from_server(conn):
-    printer = Usb(0x0416, 0x5011, in_ep=0x81, out_ep=0x03, profile="POS-5890")
     try:
         while True:
             raw = conn.recv(1024).decode()
