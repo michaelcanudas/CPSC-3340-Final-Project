@@ -30,7 +30,7 @@ def handle_magnet_inactive():
     logs.put('Sleigh magnet is now inactive')
 
 @on('presentupdate')
-def handle_present_update():
+def handle_present_update(reader, uid):
     from server import send_to_device
     send_to_device('lights', 'red')
-    logs.put('Presents were updated')
+    logs.put(f'Reader {reader} updated with UID: {uid}')

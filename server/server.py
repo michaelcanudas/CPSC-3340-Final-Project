@@ -33,8 +33,10 @@ def receive_from_device(conn, addr):
                 kind, data = raw.split(':', 1)
 
                 if kind == 'event':
-                    print(data)
-                    trigger(data)
+                    parts = data.split(':')
+                    name = parts[0]
+                    args = parts[1:]
+                    trigger(name, *args)
                     continue
 
                 with devices_lock:
