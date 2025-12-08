@@ -6,8 +6,6 @@ const char *serverIP = "193.122.147.106";
 const uint16_t serverPort = 7531;
 
 WiFiClient client;
-const int relayPin = 23; // Kept from netcode
-bool isRed = false;      // Kept from netcode logic
 
 // ================= DISPLAY CONFIGURATION =================
 // Pins from your EXISTING CODE
@@ -58,6 +56,7 @@ const int spinDelay = 100; // Speed of the spinner in ms
 void connectWiFi() {
   if (WiFi.status() == WL_CONNECTED) return;
 
+  isSpinnerMode = false; // Reset mode if wifi drops
   Serial.print("Connecting to WiFi");
   WiFi.begin(ssid);
   while (WiFi.status() != WL_CONNECTED) {
@@ -83,10 +82,6 @@ bool connectServer() {
 
 void setup() {
   Serial.begin(115200);
-
-  // Pin Setup
-  pinMode(relayPin, OUTPUT);
-  digitalWrite(relayPin, HIGH);
   
   pinMode(pot, INPUT);
   for (int i = 0; i < 7; i++) {
@@ -156,8 +151,6 @@ void loop() {
     return;
   }
 
-  isSpinnerMode = false; // Reset mode if wifi drops
-
   // 2. Process Incoming Commands
   while (client.available()) {
     String command = client.readStringUntil('\n');
@@ -174,16 +167,6 @@ void loop() {
     } 
     else if (command == "display") {
       isSpinnerMode = false;
-    }
-    
-    // Original Relay Commands (Folded in)
-    else if (command == "white") {
-      isRed = false;
-      digitalWrite(relayPin, HIGH);
-    } 
-    else if (command == "red") {
-      isRed = true;
-      digitalWrite(relayPin, LOW);
     }
   }
 

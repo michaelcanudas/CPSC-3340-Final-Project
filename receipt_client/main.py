@@ -37,12 +37,12 @@ def receive_from_server(conn):
 def start_client():
     while True:
         try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                s.connect((HOST, PORT))
-                print("Listening...")
-                s.send('printer'.encode())
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect((HOST, PORT))
+            print("Listening...")
+            s.send('printer'.encode())
 
-                receive_from_server(s)
+            receive_from_server(s)
         except Exception as e:
             print(f"Connection failed, retrying in 2s... ({e})")
             time.sleep(2)
