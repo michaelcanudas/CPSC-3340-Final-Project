@@ -26,7 +26,7 @@ void sendEvent(uint8_t readerId, byte *uid, uint8_t uidSize)
 	if (!client.connected())
 		return;
 
-	String msg = "event:";
+	String msg = "event:presentupdate:";
 	msg += String(readerId);
 
 	msg += ":";
@@ -37,7 +37,7 @@ void sendEvent(uint8_t readerId, byte *uid, uint8_t uidSize)
 		msg += String(uid[i], HEX);
 	}
 
-	client.println(msg);
+	client.print(msg);
 	Serial.println("Sent: " + msg);
 }
 
@@ -58,7 +58,7 @@ void setup()
 	if (client.connect(serverIP, serverPort))
 	{
 		Serial.println("Connected to server!");
-		client.println("presents");
+		client.print("presents");
 	}
 	else
 	{
@@ -87,7 +87,7 @@ void loop()
 		if (client.connect(serverIP, serverPort))
 		{
 			Serial.println("Reconnected!");
-			client.println("presents");
+			client.print("presents");
 		}
 		else
 		{

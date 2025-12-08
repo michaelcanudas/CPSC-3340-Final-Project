@@ -28,3 +28,9 @@ def handle_magnet_inactive():
     from server import send_to_device
     send_to_device('lights', 'white')
     logs.put('Sleigh magnet is now inactive')
+
+@on('presentupdate')
+def handle_present_update():
+    from server import send_to_device
+    send_to_device('lights', 'red')
+    logs.put('Presents were updated')
