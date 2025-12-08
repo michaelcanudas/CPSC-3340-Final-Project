@@ -33,7 +33,7 @@ def receive_from_device(conn, addr):
                 kind, data = raw.split(':', 1)
 
                 if kind == 'event':
-                    logs.put('hello!')
+                    print(data)
                     trigger(data)
                     continue
 
