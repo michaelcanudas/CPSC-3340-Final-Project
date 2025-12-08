@@ -46,6 +46,12 @@ void setup()
 	Serial.begin(115200);
 	SPI.begin();
 
+	pinMode(RST_PIN, OUTPUT);
+	digitalWrite(RST_PIN, LOW);
+	delay(20);
+	digitalWrite(RST_PIN, HIGH);
+	delay(50);
+
 	WiFi.begin(ssid);
 	Serial.print("Connecting to WiFi");
 	while (WiFi.status() != WL_CONNECTED)

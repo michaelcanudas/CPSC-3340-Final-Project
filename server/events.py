@@ -73,11 +73,17 @@ def check_sleigh_powered_on():
         send_to_device('sleigh', 'deactivate')
 
 
+
+
 @on('present_tapped')
 def handle_present_update(reader, uid):
     from server import send_to_device
     state.current_present_ids[int(reader)] = uid
-    logs.put(f'Present tapped to reader {reader} updated with UID: {uid}')
+
+    if not uid in state.present_id_to_name:
+        logs.put(f'Present tapped to reader {reader} has unknown UID: {uid}')
+        return
+    logs.put(f'Present tapped to reader {state.present_reader_names[int(reader)]}: {state.present_id_to_name[uid]}')
     
     # If all presents are correct, print lockbox code to receipt
     if state.check_presents_correct() and not state.presents_lockbox_code_printed:

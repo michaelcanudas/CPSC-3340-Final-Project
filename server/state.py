@@ -13,6 +13,31 @@ present_correct_ids = [
     "045616664e6180"
 ]
 
+present_id_to_name = {
+    "043362cc2e6180": "cello",
+    "048b25664e6180": "saxophone",
+    "049d8fcd2e6180": "flute",
+    "045b98713e6180": "nutcracker",
+    "04c20d723e6180": "hula hoop",
+    "042c566f3e6180": "golden ring",
+    "04065c703e6180": "toy rocket",
+    "040c41ce2e6180": "labubu",
+    "0442ab723e6180": "needlenose pliers",
+    "04f6556f3e6180": "marshmallow",
+    "04f6a7713e6180": "nintendo switch 2",
+    "0416c96e3e6180": "cheeseburger",
+    "040304723e6180": "violin",
+    "045616664e6180": "oreo"
+
+}
+
+present_reader_names = [
+    "Mr. Seville",
+    "Andy",
+    "Patricia",
+    "Bart"
+]
+
 current_present_ids = [
     0,
     0,
