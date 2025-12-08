@@ -39,11 +39,12 @@ def send_to_server(conn, message):
 
 def magnet_update(conn, stop_event):
     hall_was_active = False
+    print("Hall is active: " + str(hall.is_active))
     while not stop_event.is_set() and running:
         if hall.is_active and not hall_was_active:
-            send_to_server(conn, 'event:magnetactive')
+            send_to_server(conn, 'event:sleigh_magnet:true')
         elif not hall.is_active and hall_was_active:
-            send_to_server(conn, 'event:magnetinactive')
+            send_to_server(conn, 'event:sleigh_magnet:false')
 
         hall_was_active = hall.is_active
         time.sleep(0.1)

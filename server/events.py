@@ -23,16 +23,6 @@ def handle_reset():
     state.reset_state()
     logs.put('System state has been reset')
 
-@on('magnetinactive')
-def handle_magnet_inactive():
-    # legacy event
-    handle_sleigh_magnet('false')
-
-@on('magnetactive')
-def handle_magnet_active():
-    # legacy event
-    handle_sleigh_magnet('true')
-
 @on('sleigh_magnet')
 def handle_sleigh_magnet(is_present):
     from server import send_to_device
