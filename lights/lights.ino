@@ -1,7 +1,7 @@
 #include <WiFi.h>
 
 const char *ssid = "yale wireless";
-const char *serverIP = "10.66.236.77";
+const char *serverIP = "10.74.206.139";
 const uint16_t serverPort = 7531;
 
 const int relayPin = 23;

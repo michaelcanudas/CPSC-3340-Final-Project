@@ -3,7 +3,7 @@ import time
 from escpos.printer import Usb
 
 
-HOST = '10.66.236.77'
+HOST = '10.74.206.139'
 PORT = 7531
 
 
