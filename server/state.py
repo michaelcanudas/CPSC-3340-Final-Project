@@ -25,6 +25,8 @@ presents_lockbox_code_printed = False
 sleigh_magnet_present = False
 generator_magnet_present = False
 generator_powered_on = False
+is_voting_period = False
+last_map_check_time = -1
 
 def check_presents_correct():
     for i in range(len(present_correct_ids)):
@@ -38,3 +40,5 @@ def reset_state():
     sleigh_magnet_present = False
     generator_magnet_present = False
     generator_powered_on = False
+    is_voting_period = False
+    last_map_check_time = -1

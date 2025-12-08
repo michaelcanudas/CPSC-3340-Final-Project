@@ -1,5 +1,6 @@
 import state
 from state import logs
+import time
 
 
 events = {}
@@ -94,6 +95,18 @@ def handle_present_update(reader, uid):
 def handle_map_submit(data):
     from server import send_to_device
     logs.put(f'Map data submitted: {data}')
+
+    if state.is_voting_period:
+        logs.put('Map submission ignored: voting period already active')
+        return
+
+    if state.last_map_check_time != -1 and time.time() - state.last_map_check_time < 20:
+        logs.put('Map submission ignored: submitted too soon after last submission')
+        send_to_device('printer', 'print:ERROR! Naughty/nice map overloaded. Please wait 20 seconds before resubmitting.')
+        return
+
+    state.last_map_check_time = time.time()
+    state.is_voting_period = True
 
     if data == '10010': # TODO
         logs.put('!!!!! Map completed successfully !!!!! Time to voice act. Your script:\n\n')
