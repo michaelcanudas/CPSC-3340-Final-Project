@@ -1,4 +1,4 @@
-#!/bin/bash
+cd #!/bin/bash
 
 cd /home/student334/CPSC-3340-Final-Project/receipt_client
 
