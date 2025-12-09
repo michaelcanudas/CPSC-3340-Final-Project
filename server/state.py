@@ -53,6 +53,8 @@ generator_powered_on = False
 is_voting_period = False
 last_map_check_time = -1
 
+ready_for_finish = False
+
 def check_presents_correct():
     for i in range(len(present_correct_ids)):
         if present_correct_ids[i] != current_present_ids[i]:

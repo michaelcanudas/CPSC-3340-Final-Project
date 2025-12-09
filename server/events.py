@@ -68,6 +68,7 @@ def check_sleigh_powered_on():
     if sleigh_powered_on:
         logs.put('Sleigh is now powered on!!!!')
         send_to_device('sleigh', 'activate')
+        state.ready_for_finish = True
     else:
         logs.put('Sleigh is not powered on.')
         send_to_device('sleigh', 'deactivate')
@@ -94,6 +95,11 @@ def handle_present_update(reader, uid):
 @on('map_submit')
 def handle_map_submit(data):
     from server import send_to_device
+    if not state.ready_for_finish:
+        logs.put(f'Attempted to submit map without completing other puzzles')
+        send_to_device('printer', 'print:Santa recommends focusing on other puzzles before the map...')
+        return
+    
     logs.put(f'Map data submitted: {data}')
 
     if state.is_voting_period:
