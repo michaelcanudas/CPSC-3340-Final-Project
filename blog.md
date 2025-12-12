@@ -56,6 +56,12 @@ _Credits: Murad_
 ## Environmental Effects
 _Credits: Cindy and Michael_
 
+There are two key components to the envriomental effects.
+
+First, the receipt printer uses the ECSPOS library and runs a Python script on a RaspberryPi, which takes commands from a server that Michael runs on a seperate machine. It is responsible for printing all communication such a hints with the players, and is a method for dropping passwords or moving along the story line. Strings need to be formatted with code recognizable `\n` since strings sent over the server aren't parsed properly. Once the message is sent over the server, the according message prints on the printer. A second issue we ran into was getting the printer to run consistently since we kept running into USB port issues. What ultimately worked, was turning the physical printer on and off again. 
+
+Second, a relay controls the lighting in the room. The relay contians is wired to an ESP, which switches the circuit betweeen a circuit of red lights and white lights. This is also connected to the server.
+
 ## Networking and Control Room
 _Credits: Michael_
 
