@@ -46,6 +46,7 @@ magnet circle added to top so easier to hold (also on potentiometer led esp
 ## Puzzle 3: The Sleigh
 _Credits: Lily_
 
+The wiring and software logic of this puzzle was relatively easy: when a magnet sensor senses a magnet, the pi sends a message to Michael's server which then sends back a command to turn on lights and the display screen via an esp-controlled relay. The pi is always on, running a 12-days-of-christmas gif I animated in Premiere Pro. The most difficult part was the physical making of the sleigh. For one, the first time I lazer-cut my sleigh, it caught on fire. Appparently, the lazer was cutting too slowly, so at areas where there was a lot of curves close together, the wood was overheated and caught on flames. It was fixed by running the board on the larger lazer cutter, which had a stronger power and increased cutting speed, so that I was able to reduce the cutting time from 44 minutes to 6 minutes. There was also a lot of testing around to mark the exact location where the magnet sensor always detects the magnet (since the magnet sensor is on the other side of the wood board). I also had to cut slightly into the sleight boards to fit in cables and wires. All-in-all, there was a lot of precision design in making a clean, durable enclosure that withheld innocent-participants' handling and exploring. 
 ![Sleigh_Wiring_Diagram](./resources/sleighwiring.png)
 
 ## Puzzle 4: The Map
